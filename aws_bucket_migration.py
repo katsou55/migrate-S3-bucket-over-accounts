@@ -14,7 +14,7 @@ import sys
 import subprocess
 
 #print(sys.argv[0],sys.argv[1],sys.argv[2],sys.argv[3])
-if(len(sys.argv) != 5):
+if(len(sys.argv) != 4):
     print("Incorrect number of args")
     sys.exit(1)
 elif(sys.argv[1] is sys.argv[2]):
