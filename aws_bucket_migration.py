@@ -44,3 +44,4 @@ aws s3 rb s3://{0} --force --profile {2}
 
 subprocess.check_output(command, shell=True)
 subprocess.check_output(rm_migration_bucket, shell=True)
+ 
