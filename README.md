@@ -17,3 +17,11 @@ Steps
                   
 -forth arg is your aws cli profile
 
+
+Case some fails return error such as: "_An error occurred (AccessDenied) when calling the UploadPart operation: AccessDenied_"
+It is related to this issue https://github.com/aws/aws-cli/issues/1674
+
+To go around increase the multipart upload threshold.
+
+$ aws configure set default.s3.multipart_threshold 64MB
+$ aws configure set default.s3.multipart_chunksize 16MB
