@@ -1,6 +1,11 @@
-### Migrate bucket between accounts
+### Migrate bucket (bucket name & contents) between accounts
 
 #EXAMPLE: python aws_bucket_migration.py migration-carlos-999 carlos-test-999 marionete
+#EXAMPLE: python aws_bucket_migration.py <migration_bucket> <bucket to be migrated> <aws cli profile>
+
+#<migration_bucket> placeholder bucket, just give a random name here
+#<bucket to be migrated> the bucket from other account that you want to move into your own account
+#<aws cli profile> aws account where the bucket will be placed
 
 #STEPS
 #1) Create migration bucket
@@ -27,10 +32,10 @@ profile_new_bucket = sys.argv[3]
 
 command = """
 aws s3 mb s3://{0} --profile {2} &&
-aws s3 cp s3://{1}/ s3://{0}/ --recursive --profile {2} &&
+aws s3 cp s3://{1}/ s3://{0}/ --recursive --acl bucket-owner-full-control --profile {2} &&
 aws s3 rb s3://{1} --force --profile {2} &&
 aws s3 mb s3://{1} --profile {2} &&
-aws s3 cp s3://{0}/ s3://{1}/ --recursive --profile {2}
+aws s3 cp s3://{0}/ s3://{1}/ --recursive --acl bucket-owner-full-control --profile {2}
 """.format(m_bucket, target_bucket, profile_new_bucket)
 
 rm_migration_bucket = """
